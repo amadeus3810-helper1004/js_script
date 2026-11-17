@@ -1,0 +1,1706 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>만평피클볼 챔피언십 | 공식 대회 안내 및 참가신청</title>
+
+    <!-- 폰트 & 아이콘 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --court-navy: #0b1f3a;
+        --court-blue: #154378;
+        --court-green: #166534;
+        --ball-volt: #ccff00;
+        --ball-volt-dark: #a3cc00;
+        --text-light: #f8fafc;
+        --text-muted: #94a3b8;
+        --card-bg: #11294b;
+        --border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        background-color: var(--court-navy);
+        color: var(--text-light);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* 네비게이션 바 */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(11, 31, 58, 0.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: var(--text-light);
+        text-decoration: none;
+      }
+
+      .logo-ball {
+        width: 28px;
+        height: 28px;
+        background: var(--ball-volt);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--court-navy);
+        font-size: 0.75rem;
+        box-shadow: 0 0 12px rgba(204, 255, 0, 0.6);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--ball-volt);
+      }
+
+      .nav-cta {
+        background: var(--ball-volt);
+        color: var(--court-navy) !important;
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-weight: 700 !important;
+      }
+
+      .nav-cta:hover {
+        background: var(--ball-volt-dark);
+      }
+
+      /* 첫 화면 (HERO) - 100% 피클볼 전용 인터랙티브 코트 뷰 */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 100px 20px 60px;
+        background: radial-gradient(circle at 70% 40%, #1a4d8c 0%, #0b1f3a 70%);
+        overflow: hidden;
+      }
+
+      #pickleballCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0.85;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(11, 31, 58, 0.92) 0%,
+          rgba(11, 31, 58, 0.55) 55%,
+          rgba(11, 31, 58, 0.25) 100%
+        );
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 3;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(204, 255, 0, 0.15);
+        border: 1px solid var(--ball-volt);
+        color: var(--ball-volt);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.3rem, 4.5vw, 3.8rem);
+        font-weight: 900;
+        line-height: 1.18;
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero h1 span {
+        color: var(--ball-volt);
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        color: #cbd5e1;
+        margin-bottom: 30px;
+        max-width: 540px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 36px;
+      }
+
+      .btn-primary {
+        background: var(--ball-volt);
+        color: var(--court-navy);
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-weight: 800;
+        font-size: 1.05rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        box-shadow: 0 8px 25px rgba(204, 255, 0, 0.35);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(204, 255, 0, 0.5);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text-light);
+        padding: 15px 26px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transition: background 0.2s;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      /* 실시간 참가 현황 카드 (호기심 및 참여 유도) */
+      .live-status-bar {
+        display: flex;
+        gap: 24px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .stat-item strong {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--ball-volt);
+      }
+
+      .stat-item span {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* 우측 피클볼 랠리 위젯 카드 */
+      .court-live-card {
+        background: rgba(17, 41, 75, 0.82);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(204, 255, 0, 0.35);
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      }
+
+      .court-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        font-size: 0.9rem;
+      }
+
+      .live-dot {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--ball-volt);
+        font-weight: 700;
+      }
+
+      .live-dot::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        background: var(--ball-volt);
+        border-radius: 50%;
+        animation: pulse 1.2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(0.95);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.4);
+          opacity: 0.4;
+        }
+        100% {
+          transform: scale(0.95);
+          opacity: 1;
+        }
+      }
+
+      /* 순수 SVG 피클볼 코트 & 랠리 다이어그램 */
+      .svg-court-box {
+        background: #14532d;
+        border: 3px solid #ffffff;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 16px;
+      }
+
+      .rally-tip {
+        font-size: 0.9rem;
+        color: #e2e8f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .rally-speed-btn {
+        background: rgba(204, 255, 0, 0.18);
+        border: 1px solid var(--ball-volt);
+        color: var(--ball-volt);
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      /* 공통 섹션 스타일 */
+      section {
+        padding: 90px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-sub {
+        color: var(--ball-volt);
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .section-title {
+        font-size: 2.1rem;
+        font-weight: 900;
+        margin-bottom: 12px;
+      }
+
+      .section-desc {
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* 1. 대회 홍보 섹션 */
+      .promo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .promo-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 28px;
+        transition:
+          transform 0.25s,
+          border-color 0.25s;
+      }
+
+      .promo-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--ball-volt);
+      }
+
+      .promo-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(204, 255, 0, 0.12);
+        color: var(--ball-volt);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        margin-bottom: 18px;
+      }
+
+      .promo-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+      }
+
+      .promo-card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      /* 2. 예선 대진표 (조별 리그) */
+      .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        background: var(--card-bg);
+        color: var(--text-light);
+        border: 1px solid var(--border-color);
+        padding: 10px 22px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .tab-btn.active {
+        background: var(--ball-volt);
+        color: var(--court-navy);
+        border-color: var(--ball-volt);
+      }
+
+      .prelim-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
+
+      .group-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .group-header {
+        background: var(--court-blue);
+        padding: 14px 20px;
+        font-weight: 800;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .group-header span {
+        font-size: 0.8rem;
+        color: var(--ball-volt);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+      }
+
+      th,
+      td {
+        padding: 12px 16px;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      th {
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.82rem;
+      }
+
+      td:first-child,
+      th:first-child {
+        text-align: left;
+      }
+
+      .qualify-badge {
+        background: rgba(204, 255, 0, 0.18);
+        color: var(--ball-volt);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      /* 3. 본선 토너먼트 대진표 (8강 -> 4강 -> 결승) */
+      .bracket-wrapper {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 30px;
+        overflow-x: auto;
+      }
+
+      .bracket {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(240px, 1fr));
+        gap: 36px;
+        min-width: 780px;
+        align-items: center;
+      }
+
+      .round-title {
+        text-align: center;
+        color: var(--ball-volt);
+        font-weight: 800;
+        margin-bottom: 18px;
+        font-size: 1rem;
+      }
+
+      .match-box {
+        background: var(--court-navy);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        margin-bottom: 18px;
+        overflow: hidden;
+      }
+
+      .match-team {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .match-team:last-child {
+        border-bottom: none;
+      }
+
+      .match-team.winner {
+        background: rgba(204, 255, 0, 0.12);
+        font-weight: 700;
+        color: var(--ball-volt);
+      }
+
+      .seed {
+        color: var(--text-muted);
+        margin-right: 6px;
+        font-size: 0.8rem;
+      }
+
+      /* 4. 실시간 경기결과 & 스코어보드 */
+      .results-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .search-input {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-light);
+        padding: 10px 16px;
+        border-radius: 8px;
+        min-width: 260px;
+        font-family: inherit;
+      }
+
+      .results-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .result-item {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 18px 24px;
+        display: grid;
+        grid-template-columns: 120px 1fr 140px 1fr 110px;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .court-tag {
+        background: var(--court-blue);
+        color: var(--text-light);
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .team-name {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .team-left {
+        text-align: right;
+      }
+      .team-right {
+        text-align: left;
+      }
+
+      .score-pill {
+        background: var(--court-navy);
+        border: 1px solid var(--ball-volt);
+        color: var(--ball-volt);
+        font-weight: 900;
+        font-size: 1.15rem;
+        padding: 6px 14px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .status-tag {
+        font-size: 0.8rem;
+        text-align: right;
+        color: var(--text-muted);
+      }
+
+      /* 5. 선수 회원가입 및 대회 참가 신청 폼 */
+      .register-container {
+        background: linear-gradient(145deg, #13315c 0%, #0d2342 100%);
+        border: 1px solid rgba(204, 255, 0, 0.3);
+        border-radius: 20px;
+        padding: 40px;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .reg-benefits h3 {
+        font-size: 1.6rem;
+        margin-bottom: 14px;
+      }
+
+      .reg-benefits ul {
+        list-style: none;
+        margin-top: 20px;
+      }
+
+      .reg-benefits li {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #e2e8f0;
+      }
+
+      .reg-benefits i {
+        color: var(--ball-volt);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #cbd5e1;
+      }
+
+      input,
+      select {
+        background: rgba(11, 31, 58, 0.85);
+        border: 1px solid var(--border-color);
+        color: var(--text-light);
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.95rem;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--ball-volt);
+      }
+
+      .registered-players-box {
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .player-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .player-chip {
+        background: rgba(204, 255, 0, 0.14);
+        border: 1px solid rgba(204, 255, 0, 0.35);
+        color: var(--ball-volt);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        padding: 40px 20px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      /* 반응형 처리 */
+      @media (max-width: 900px) {
+        .hero-content,
+        .register-container {
+          grid-template-columns: 1fr;
+        }
+        .result-item {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .team-left,
+        .team-right,
+        .status-tag {
+          text-align: center;
+        }
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 상단 네비게이션 -->
+    <header>
+      <div class="nav-container">
+        <a href="#" class="logo">
+          <span class="logo-ball"><i class="fa-solid fa-circle-dot"></i></span>
+          만평피클볼
+        </a>
+        <ul class="nav-links">
+          <li><a href="#promo">대회홍보</a></li>
+          <li><a href="#prelim">예선대진표</a></li>
+          <li><a href="#bracket">본선대진표</a></li>
+          <li><a href="#results">경기결과</a></li>
+          <li><a href="#register" class="nav-cta">선수 회원가입</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- 첫 화면: 100% 피클볼 실제 코트/랠리 애니메이션 & 가입 유도 -->
+    <div class="hero">
+      <!-- 순수 피클볼 코트·패들·40홀 볼 인터랙티브 캔버스 (외부 무관 이미지 0%) -->
+      <canvas id="pickleballCanvas"></canvas>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div>
+          <div class="badge">
+            <i class="fa-solid fa-trophy"></i> 2026 제1회 만평피클볼 오픈
+            챔피언십
+          </div>
+          <h1>
+            논발리 존 앞의 긴장감,<br />
+            <span>만평피클볼</span> 코트의<br />
+            주인공이 되세요!
+          </h1>
+          <p>
+            40홀 피클볼이 네트를 가르는 짜릿한 딩크(Dink)와 스매시! 초심자부터
+            오픈부까지 실력별 맞춤 조별 예선과 본선 토너먼트가 지금 열립니다.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#register" class="btn-primary">
+              <i class="fa-solid fa-user-plus"></i> 지금 선수 가입 및 참가신청
+            </a>
+            <a href="#prelim" class="btn-secondary">
+              <i class="fa-solid fa-table-list"></i> 실시간 대진표 보기
+            </a>
+          </div>
+
+          <div class="live-status-bar">
+            <div class="stat-item">
+              <strong id="participantCount">58 / 64팀</strong>
+              <span>실시간 엔트리 현황</span>
+            </div>
+            <div class="stat-item">
+              <strong>총 300만원</strong>
+              <span>우승 상금 및 패들 시상품</span>
+            </div>
+            <div class="stat-item">
+              <strong>최소 3경기</strong>
+              <span>조별 풀리그 보장</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 우측 인터랙티브 피클볼 코트 시뮬레이션 카드 -->
+        <div class="court-live-card">
+          <div class="court-card-header">
+            <span class="live-dot">LIVE PICKLEBALL RALLY SIMULATOR</span>
+            <span style="color: var(--text-muted)">규격 코트 20ft × 44ft</span>
+          </div>
+
+          <!-- 순수 SVG 피클볼 전용 코트 & 패들 랠리 -->
+          <div class="svg-court-box">
+            <svg
+              id="miniCourtSvg"
+              viewBox="0 0 440 220"
+              width="100%"
+              height="auto"
+            >
+              <!-- 아웃 코트 -->
+              <rect
+                x="10"
+                y="10"
+                width="420"
+                height="200"
+                fill="#1e3a8a"
+                stroke="#ffffff"
+                stroke-width="3"
+              />
+              <!-- 논발리 존 (Kitchen) -->
+              <rect
+                x="150"
+                y="10"
+                width="140"
+                height="200"
+                fill="#0284c7"
+                stroke="#ffffff"
+                stroke-width="2.5"
+              />
+              <!-- 센터 라인 -->
+              <line
+                x1="10"
+                y1="110"
+                x2="150"
+                y2="110"
+                stroke="#ffffff"
+                stroke-width="2.5"
+              />
+              <line
+                x1="290"
+                y1="110"
+                x2="430"
+                y2="110"
+                stroke="#ffffff"
+                stroke-width="2.5"
+              />
+              <!-- 네트 -->
+              <line
+                x1="220"
+                y1="5"
+                x2="220"
+                y2="215"
+                stroke="#ccff00"
+                stroke-width="4"
+                stroke-dasharray="6,4"
+              />
+
+              <!-- 구역 라벨 -->
+              <text
+                x="185"
+                y="30"
+                fill="#ffffff"
+                font-size="10"
+                font-weight="bold"
+                opacity="0.85"
+              >
+                NVZ (KITCHEN)
+              </text>
+              <text
+                x="230"
+                y="30"
+                fill="#ffffff"
+                font-size="10"
+                font-weight="bold"
+                opacity="0.85"
+              >
+                NVZ (KITCHEN)
+              </text>
+
+              <!-- 왼쪽 피클볼 패들 -->
+              <g id="paddleLeft" transform="translate(55, 90)">
+                <rect
+                  x="0"
+                  y="0"
+                  width="16"
+                  height="36"
+                  rx="6"
+                  fill="#ccff00"
+                  stroke="#0b1f3a"
+                  stroke-width="2"
+                />
+                <rect
+                  x="-10"
+                  y="14"
+                  width="10"
+                  height="8"
+                  rx="2"
+                  fill="#0b1f3a"
+                />
+              </g>
+
+              <!-- 오른쪽 피클볼 패들 -->
+              <g id="paddleRight" transform="translate(369, 90)">
+                <rect
+                  x="0"
+                  y="0"
+                  width="16"
+                  height="36"
+                  rx="6"
+                  fill="#38bdf8"
+                  stroke="#0b1f3a"
+                  stroke-width="2"
+                />
+                <rect
+                  x="16"
+                  y="14"
+                  width="10"
+                  height="8"
+                  rx="2"
+                  fill="#0b1f3a"
+                />
+              </g>
+
+              <!-- 40홀 피클볼 -->
+              <g id="svgBall" transform="translate(220, 110)">
+                <circle
+                  cx="0"
+                  cy="0"
+                  r="8"
+                  fill="#ccff00"
+                  stroke="#0b1f3a"
+                  stroke-width="1.5"
+                />
+                <circle cx="-3" cy="-2" r="1.2" fill="#0b1f3a" />
+                <circle cx="3" cy="-2" r="1.2" fill="#0b1f3a" />
+                <circle cx="0" cy="3" r="1.2" fill="#0b1f3a" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="rally-tip">
+            <span id="rallyModeText"
+              >현재 랠리: <strong>논발리 존 앞 고속 딩크 랠리</strong></span
+            >
+            <button class="rally-speed-btn" id="toggleRallyBtn">
+              스매시 모드 전환
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. 대회 홍보 섹션 -->
+    <section id="promo">
+      <div class="section-header">
+        <div class="section-sub">TOURNAMENT INFO</div>
+        <h2 class="section-title">만평피클볼 챔피언십 대회 안내</h2>
+        <p class="section-desc">
+          모든 참가 선수가 최상의 코트 컨디션에서 공정하고 즐겁게 경쟁할 수
+          있도록 준비했습니다.
+        </p>
+      </div>
+
+      <div class="promo-grid">
+        <div class="promo-card">
+          <div class="promo-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <h3>일시 및 장소</h3>
+          <p>
+            <strong>2026년 12월 12일(토) 09:00</strong><br />만평 전용 실내
+            피클볼 센터 (전 코트 USAPA 규격 아크릴 바닥 8면 완비)
+          </p>
+        </div>
+        <div class="promo-card">
+          <div class="promo-icon"><i class="fa-solid fa-users"></i></div>
+          <h3>모집 부문 (복식)</h3>
+          <p>
+            • 남자 복식 (오픈부 / 3.5 이하)<br />• 여자 복식 (오픈부 / 3.5
+            이하)<br />• 혼합 복식 (통합부)
+          </p>
+        </div>
+        <div class="promo-card">
+          <div class="promo-icon"><i class="fa-solid fa-medal"></i></div>
+          <h3>시상 및 참가 혜택</h3>
+          <p>
+            부문별 1위 상금 50만원 + 카본 피클볼 패들, 2위 30만원, 3위 15만원.
+            전원 대회 기념 드라이핏 티셔츠 및 공인구 증정.
+          </p>
+        </div>
+        <div class="promo-card">
+          <div class="promo-icon">
+            <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+          </div>
+          <h3>경기 방식 및 공인구</h3>
+          <p>
+            예선 조별 풀리그(11점 단세트, 듀스 없음) 후 각 조 1·2위 본선
+            토너먼트(15점 랠리/사이드아웃 규정 준수). 공인구: Franklin X-40.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 예선 대진표 섹션 -->
+    <section id="prelim">
+      <div class="section-header">
+        <div class="section-sub">PRELIMINARY ROUND</div>
+        <h2 class="section-title">예선 조별 리그 대진표</h2>
+        <p class="section-desc">
+          부문별 탭을 선택하여 조 편성과 실시간 승점 및 득실차를 확인하세요.
+        </p>
+      </div>
+
+      <div class="tabs" id="prelimTabs">
+        <button class="tab-btn active" data-division="men">남자 복식</button>
+        <button class="tab-btn" data-division="women">여자 복식</button>
+        <button class="tab-btn" data-division="mixed">혼합 복식</button>
+      </div>
+
+      <div class="prelim-grid" id="prelimContainer">
+        <!-- JS로 동적 렌더링 -->
+      </div>
+    </section>
+
+    <!-- 3. 본선 대진표 섹션 -->
+    <section id="bracket">
+      <div class="section-header">
+        <div class="section-sub">MAIN TOURNAMENT BRACKET</div>
+        <h2 class="section-title">본선 8강 토너먼트 대진표</h2>
+        <p class="section-desc">
+          예선 각 조 상위 2팀이 진출하는 단판 승부 토너먼트 현황입니다.
+        </p>
+      </div>
+
+      <div class="bracket-wrapper">
+        <div class="bracket">
+          <!-- 8강 -->
+          <div>
+            <div class="round-title">8강전 (Quarterfinals)</div>
+            <div class="match-box">
+              <div class="match-team winner">
+                <span><span class="seed">A1</span>김민수 / 박지훈</span
+                ><span>15</span>
+              </div>
+              <div class="match-team">
+                <span><span class="seed">D2</span>정우성 / 이정재</span
+                ><span>9</span>
+              </div>
+            </div>
+            <div class="match-box">
+              <div class="match-team">
+                <span><span class="seed">B1</span>최현우 / 강동원</span
+                ><span>12</span>
+              </div>
+              <div class="match-team winner">
+                <span><span class="seed">C2</span>손흥민 / 황희찬</span
+                ><span>15</span>
+              </div>
+            </div>
+            <div class="match-box">
+              <div class="match-team winner">
+                <span><span class="seed">C1</span>이강인 / 김민재</span
+                ><span>15</span>
+              </div>
+              <div class="match-team">
+                <span><span class="seed">B2</span>조규성 / 백승호</span
+                ><span>11</span>
+              </div>
+            </div>
+            <div class="match-box">
+              <div class="match-team winner">
+                <span><span class="seed">D1</span>박성훈 / 류준열</span
+                ><span>15</span>
+              </div>
+              <div class="match-team">
+                <span><span class="seed">A2</span>유해진 / 차승원</span
+                ><span>13</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4강 -->
+          <div>
+            <div class="round-title">4강전 (Semifinals)</div>
+            <div class="match-box" style="margin-bottom: 90px">
+              <div class="match-team winner">
+                <span><span class="seed">A1</span>김민수 / 박지훈</span
+                ><span>15</span>
+              </div>
+              <div class="match-team">
+                <span><span class="seed">C2</span>손흥민 / 황희찬</span
+                ><span>10</span>
+              </div>
+            </div>
+            <div class="match-box">
+              <div class="match-team">
+                <span><span class="seed">C1</span>이강인 / 김민재</span
+                ><span>13</span>
+              </div>
+              <div class="match-team winner">
+                <span><span class="seed">D1</span>박성훈 / 류준열</span
+                ><span>15</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 결승 -->
+          <div>
+            <div class="round-title">
+              <i class="fa-solid fa-crown"></i> 결승전 (Final)
+            </div>
+            <div class="match-box" style="border: 2px solid var(--ball-volt)">
+              <div class="match-team">
+                <span><span class="seed">A1</span>김민수 / 박지훈</span
+                ><span>16:30</span>
+              </div>
+              <div class="match-team">
+                <span><span class="seed">D1</span>박성훈 / 류준열</span
+                ><span>1번 코트</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 경기 결과 섹션 -->
+    <section id="results">
+      <div class="section-header">
+        <div class="section-sub">LIVE MATCH RESULTS</div>
+        <h2 class="section-title">실시간 경기 결과</h2>
+        <p class="section-desc">
+          선수 이름이나 코트 번호를 검색해 방금 종료된 스코어를 바로 확인하세요.
+        </p>
+      </div>
+
+      <div class="results-controls">
+        <input
+          type="text"
+          id="resultSearch"
+          class="search-input"
+          placeholder="선수명 또는 코트 검색 (예: 김민수, 1코트)"
+        />
+        <span style="color: var(--text-muted); font-size: 0.9rem"
+          >* 11점 단세트 기준 (본선 15점)</span
+        >
+      </div>
+
+      <div class="results-list" id="resultsList">
+        <!-- JS로 동적 렌더링 -->
+      </div>
+    </section>
+
+    <!-- 5. 선수 회원가입 및 대회 참가 신청 -->
+    <section id="register">
+      <div class="register-container">
+        <div class="reg-benefits">
+          <div class="badge">PLAYER REGISTRATION</div>
+          <h3>만평피클볼 선수 회원가입</h3>
+          <p style="color: #cbd5e1">
+            회원가입과 동시에 이번 대회 엔트리에 자동 등록되며, 향후 만평피클볼
+            정기 교류전 및 랭킹 포인트가 누적 관리됩니다.
+          </p>
+          <ul>
+            <li>
+              <i class="fa-solid fa-circle-check"></i> 개인별 공식 DUPR 스타일
+              레이팅 부여
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i> 내 경기 코트 배정 실시간
+              알림 제공
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i> 파트너 미정 시 '파트너
+              매칭 풀' 자동 연결
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i> 참가비 30,000원 (기념
+              티셔츠 + 간식 포함)
+            </li>
+          </ul>
+
+          <div class="registered-players-box">
+            <strong style="font-size: 0.9rem; color: var(--ball-volt)"
+              >방금 가입한 신청 선수 명단</strong
+            >
+            <div class="player-chips" id="playerChips">
+              <span class="player-chip">김민수 (남복 오픈)</span>
+              <span class="player-chip">이지은 (여복 3.5)</span>
+              <span class="player-chip">박현우 (혼복 통합)</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="signupForm" class="form-grid">
+          <div class="form-group">
+            <label for="playerName">선수 성명 *</label>
+            <input type="text" id="playerName" required placeholder="홍길동" />
+          </div>
+          <div class="form-group">
+            <label for="playerPhone">연락처 *</label>
+            <input
+              type="tel"
+              id="playerPhone"
+              required
+              placeholder="010-1234-5678"
+            />
+          </div>
+          <div class="form-group">
+            <label for="playerEmail">이메일 (아이디) *</label>
+            <input
+              type="email"
+              id="playerEmail"
+              required
+              placeholder="player@manpyeong.kr"
+            />
+          </div>
+          <div class="form-group">
+            <label for="playerPw">비밀번호 *</label>
+            <input
+              type="password"
+              id="playerPw"
+              required
+              placeholder="6자 이상 입력"
+            />
+          </div>
+          <div class="form-group">
+            <label for="divisionSelect">참가 희망 부문 *</label>
+            <select id="divisionSelect" required>
+              <option value="남자 복식 (오픈부)">남자 복식 (오픈부)</option>
+              <option value="남자 복식 (3.5 이하)">남자 복식 (3.5 이하)</option>
+              <option value="여자 복식 (오픈부)">여자 복식 (오픈부)</option>
+              <option value="여자 복식 (3.5 이하)">여자 복식 (3.5 이하)</option>
+              <option value="혼합 복식 (통합부)">혼합 복식 (통합부)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="partnerName">파트너 성명 (없으면 '매칭희망')</label>
+            <input
+              type="text"
+              id="partnerName"
+              placeholder="예: 김철수 또는 매칭희망"
+            />
+          </div>
+          <div class="form-group full">
+            <label for="skillLevel">피클볼 구력 및 실력 등급</label>
+            <select id="skillLevel">
+              <option value="입문 (6개월 미만 / 2.5)">
+                입문 (6개월 미만 / 2.5)
+              </option>
+              <option value="중급 (6개월~2년 / 3.0~3.5)" selected>
+                중급 (6개월~2년 / 3.0~3.5)
+              </option>
+              <option value="상급 (2년 이상 / 4.0+)">
+                상급 (2년 이상 / 4.0+)
+              </option>
+            </select>
+          </div>
+          <div class="form-group full" style="margin-top: 8px">
+            <button
+              type="submit"
+              class="btn-primary"
+              style="width: 100%; justify-content: center"
+            >
+              <i class="fa-solid fa-check-to-slot"></i> 회원가입 및 대회 참가
+              완료하기
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        <strong>만평피클볼 조직위원회</strong> | 문의: 053-000-0000 | 대회장:
+        만평 실내 피클볼 전용구장
+      </p>
+      <p style="margin-top: 6px; font-size: 0.8rem">
+        © 2026 MANPYEONG PICKLEBALL CHAMPIONSHIP. All rights reserved.
+      </p>
+    </footer>
+
+    <script>
+      /* =========================================================
+       1. 첫 화면 배경 캔버스: 피클볼 전용 코트 & 타공 볼 궤적 애니메이션
+       ========================================================= */
+      const canvas = document.getElementById("pickleballCanvas");
+      const ctx = canvas.getContext("2d");
+      let width, height;
+
+      function resizeCanvas() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // 배경에 떠다니며 바운스하는 40홀 피클볼 객체들
+      const balls = Array.from({ length: 9 }, (_, i) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: 14 + (i % 3) * 5,
+        vx: (Math.random() - 0.5) * 2.4,
+        vy: (Math.random() - 0.5) * 2.4,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.03,
+      }));
+
+      function drawPickleball(b) {
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.rotate(b.angle);
+
+        // 네온 라임 피클볼 본체
+        ctx.beginPath();
+        ctx.arc(0, 0, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(204, 255, 0, 0.28)";
+        ctx.fill();
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = "rgba(204, 255, 0, 0.65)";
+        ctx.stroke();
+
+        // 피클볼 특유의 타공(구멍) 패턴
+        const holes = [
+          [0, 0],
+          [-b.r * 0.45, -b.r * 0.3],
+          [b.r * 0.45, -b.r * 0.3],
+          [-b.r * 0.45, b.r * 0.3],
+          [b.r * 0.45, b.r * 0.3],
+          [0, -b.r * 0.55],
+          [0, b.r * 0.55],
+        ];
+        ctx.fillStyle = "rgba(11, 31, 58, 0.75)";
+        holes.forEach(([hx, hy]) => {
+          ctx.beginPath();
+          ctx.arc(hx, hy, b.r * 0.13, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.restore();
+      }
+
+      function drawBackgroundCourtLines() {
+        ctx.save();
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.lineWidth = 2;
+
+        const cw = Math.min(width * 0.75, 860);
+        const ch = cw * 0.48;
+        const cx = width * 0.58 - cw / 2;
+        const cy = height * 0.52 - ch / 2;
+
+        // 외곽선
+        ctx.strokeRect(cx, cy, cw, ch);
+        // 논발리 존(Kitchen) 라인
+        const nvzOffset = cw * 0.34;
+        ctx.beginPath();
+        ctx.moveTo(cx + nvzOffset, cy);
+        ctx.lineTo(cx + nvzOffset, cy + ch);
+        ctx.moveTo(cx + cw - nvzOffset, cy);
+        ctx.lineTo(cx + cw - nvzOffset, cy + ch);
+        // 센터 라인
+        ctx.moveTo(cx, cy + ch / 2);
+        ctx.lineTo(cx + nvzOffset, cy + ch / 2);
+        ctx.moveTo(cx + cw - nvzOffset, cy + ch / 2);
+        ctx.lineTo(cx + cw, cy + ch / 2);
+        ctx.stroke();
+
+        // 중앙 네트
+        ctx.strokeStyle = "rgba(204, 255, 0, 0.22)";
+        ctx.setLineDash([8, 6]);
+        ctx.beginPath();
+        ctx.moveTo(cx + cw / 2, cy - 10);
+        ctx.lineTo(cx + cw / 2, cy + ch + 10);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function animateHeroCanvas() {
+        ctx.clearRect(0, 0, width, height);
+        drawBackgroundCourtLines();
+
+        balls.forEach((b) => {
+          b.x += b.vx;
+          b.y += b.vy;
+          b.angle += b.spin;
+
+          if (b.x - b.r < 0 || b.x + b.r > width) b.vx *= -1;
+          if (b.y - b.r < 0 || b.y + b.r > height) b.vy *= -1;
+
+          drawPickleball(b);
+        });
+
+        requestAnimationFrame(animateHeroCanvas);
+      }
+      animateHeroCanvas();
+
+      /* =========================================================
+       2. 우측 미니 코트 SVG 랠리 시뮬레이터 (딩크 vs 스매시 전환)
+       ========================================================= */
+      const svgBall = document.getElementById("svgBall");
+      const paddleLeft = document.getElementById("paddleLeft");
+      const paddleRight = document.getElementById("paddleRight");
+      const toggleRallyBtn = document.getElementById("toggleRallyBtn");
+      const rallyModeText = document.getElementById("rallyModeText");
+
+      let isSmashMode = false;
+      let t = 0;
+
+      toggleRallyBtn.addEventListener("click", () => {
+        isSmashMode = !isSmashMode;
+        if (isSmashMode) {
+          rallyModeText.innerHTML =
+            '현재 랠리: <strong style="color:#ccff00">베이스라인 강타 스매시 랠리!</strong>';
+          toggleRallyBtn.textContent = "딩크 모드 전환";
+        } else {
+          rallyModeText.innerHTML =
+            "현재 랠리: <strong>논발리 존 앞 고속 딩크 랠리</strong>";
+          toggleRallyBtn.textContent = "스매시 모드 전환";
+        }
+      });
+
+      function animateMiniCourt() {
+        t += isSmashMode ? 0.065 : 0.035;
+        const minX = isSmashMode ? 75 : 155;
+        const maxX = isSmashMode ? 365 : 285;
+        const midX = (minX + maxX) / 2;
+        const ampX = (maxX - minX) / 2;
+
+        const bx = midX + Math.sin(t) * ampX;
+        const by = 110 + Math.cos(t * 1.4) * (isSmashMode ? 55 : 35);
+
+        svgBall.setAttribute("transform", `translate(${bx}, ${by})`);
+
+        // 패들도 공의 위치를 따라 실시간 움직임
+        const leftX = isSmashMode ? 55 : 132;
+        const rightX = isSmashMode ? 369 : 292;
+        paddleLeft.setAttribute("transform", `translate(${leftX}, ${by - 18})`);
+        paddleRight.setAttribute(
+          "transform",
+          `translate(${rightX}, ${by - 18})`,
+        );
+
+        requestAnimationFrame(animateMiniCourt);
+      }
+      animateMiniCourt();
+
+      /* =========================================================
+       3. 예선 조별 리그 데이터 및 탭 전환
+       ========================================================= */
+      const prelimData = {
+        men: [
+          {
+            group: "남자 복식 A조",
+            court: "1번 코트",
+            teams: [
+              { name: "김민수 / 박지훈", w: 3, l: 0, diff: "+14", pass: true },
+              { name: "유해진 / 차승원", w: 2, l: 1, diff: "+5", pass: true },
+              { name: "이병헌 / 하정우", w: 1, l: 2, diff: "-6", pass: false },
+              { name: "송강호 / 설경구", w: 0, l: 3, diff: "-13", pass: false },
+            ],
+          },
+          {
+            group: "남자 복식 B조",
+            court: "2번 코트",
+            teams: [
+              { name: "최현우 / 강동원", w: 3, l: 0, diff: "+11", pass: true },
+              { name: "조규성 / 백승호", w: 2, l: 1, diff: "+4", pass: true },
+              { name: "오지환 / 김현수", w: 1, l: 2, diff: "-5", pass: false },
+              { name: "양현종 / 김광현", w: 0, l: 3, diff: "-10", pass: false },
+            ],
+          },
+        ],
+        women: [
+          {
+            group: "여자 복식 A조",
+            court: "3번 코트",
+            teams: [
+              { name: "김연아 / 이상화", w: 3, l: 0, diff: "+15", pass: true },
+              { name: "신유빈 / 전지희", w: 2, l: 1, diff: "+6", pass: true },
+              { name: "안세영 / 김소영", w: 1, l: 2, diff: "-8", pass: false },
+              { name: "김연경 / 양효진", w: 0, l: 3, diff: "-13", pass: false },
+            ],
+          },
+          {
+            group: "여자 복식 B조",
+            court: "4번 코트",
+            teams: [
+              { name: "이지은 / 배수지", w: 2, l: 1, diff: "+9", pass: true },
+              { name: "한소희 / 고윤정", w: 2, l: 1, diff: "+7", pass: true },
+              { name: "김태리 / 박은빈", w: 2, l: 1, diff: "+1", pass: false },
+              { name: "손예진 / 전지현", w: 0, l: 3, diff: "-17", pass: false },
+            ],
+          },
+        ],
+        mixed: [
+          {
+            group: "혼합 복식 A조",
+            court: "5번 코트",
+            teams: [
+              { name: "박현우 / 이지은", w: 3, l: 0, diff: "+12", pass: true },
+              { name: "서승재 / 채유정", w: 2, l: 1, diff: "+6", pass: true },
+              { name: "김원호 / 정나은", w: 1, l: 2, diff: "-7", pass: false },
+              { name: "임종훈 / 신유빈", w: 0, l: 3, diff: "-11", pass: false },
+            ],
+          },
+        ],
+      };
+
+      const prelimContainer = document.getElementById("prelimContainer");
+      function renderPrelim(division) {
+        prelimContainer.innerHTML = prelimData[division]
+          .map(
+            (g) => `
+        <div class="group-card">
+          <div class="group-header">
+            <div>${g.group}</div>
+            <span>${g.court}</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>팀명</th>
+                <th>승</th>
+                <th>패</th>
+                <th>득실</th>
+                <th>본선</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${g.teams
+                .map(
+                  (t) => `
+                <tr>
+                  <td><strong>${t.name}</strong></td>
+                  <td>${t.w}</td>
+                  <td>${t.l}</td>
+                  <td>${t.diff}</td>
+                  <td>${t.pass ? '<span class="qualify-badge">진출</span>' : "-"}</td>
+                </tr>
+              `,
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+      `,
+          )
+          .join("");
+      }
+      renderPrelim("men");
+
+      document.querySelectorAll("#prelimTabs .tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll("#prelimTabs .tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderPrelim(btn.dataset.division);
+        });
+      });
+
+      /* =========================================================
+       4. 실시간 경기 결과 데이터 및 검색 필터링
+       ========================================================= */
+      const matchResults = [
+        {
+          court: "1코트 (8강)",
+          teamA: "김민수 / 박지훈",
+          score: "15 : 9",
+          teamB: "정우성 / 이정재",
+          time: "종료 (14:20)",
+        },
+        {
+          court: "2코트 (8강)",
+          teamA: "최현우 / 강동원",
+          score: "12 : 15",
+          teamB: "손흥민 / 황희찬",
+          time: "종료 (14:35)",
+        },
+        {
+          court: "3코트 (예선)",
+          teamA: "김연아 / 이상화",
+          score: "11 : 4",
+          teamB: "안세영 / 김소영",
+          time: "종료 (13:50)",
+        },
+        {
+          court: "4코트 (예선)",
+          teamA: "이지은 / 배수지",
+          score: "11 : 8",
+          teamB: "한소희 / 고윤정",
+          time: "종료 (14:05)",
+        },
+        {
+          court: "5코트 (혼복)",
+          teamA: "박현우 / 이지은",
+          score: "11 : 6",
+          teamB: "서승재 / 채유정",
+          time: "종료 (14:15)",
+        },
+      ];
+
+      const resultsList = document.getElementById("resultsList");
+      function renderResults(keyword = "") {
+        const filtered = matchResults.filter(
+          (r) =>
+            r.teamA.includes(keyword) ||
+            r.teamB.includes(keyword) ||
+            r.court.includes(keyword),
+        );
+        resultsList.innerHTML = filtered
+          .map(
+            (r) => `
+        <div class="result-item">
+          <div class="court-tag">${r.court}</div>
+          <div class="team-name team-left">${r.teamA}</div>
+          <div class="score-pill">${r.score}</div>
+          <div class="team-name team-right">${r.teamB}</div>
+          <div class="status-tag">${r.time}</div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+      renderResults();
+
+      document.getElementById("resultSearch").addEventListener("input", (e) => {
+        renderResults(e.target.value.trim());
+      });
+
+      /* =========================================================
+       5. 선수 회원가입 및 실시간 엔트리 반영
+       ========================================================= */
+      let currentTeams = 58;
+      const signupForm = document.getElementById("signupForm");
+      const playerChips = document.getElementById("playerChips");
+      const participantCount = document.getElementById("participantCount");
+
+      signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("playerName").value.trim();
+        const division = document.getElementById("divisionSelect").value;
+        const partner =
+          document.getElementById("partnerName").value.trim() || "매칭희망";
+
+        // 실시간 신청 명단에 칩 추가
+        const chip = document.createElement("span");
+        chip.className = "player-chip";
+        chip.textContent = `${name} (${division.split(" ")[0]} · ${partner})`;
+        playerChips.prepend(chip);
+
+        // 상단 참가팀 수 카운트 업데이트
+        if (currentTeams < 64) {
+          currentTeams++;
+          participantCount.textContent = `${currentTeams} / 64팀`;
+        }
+
+        alert(
+          `[만평피클볼] ${name} 선수님, 회원가입 및 '${division}' 참가 신청이 완료되었습니다!`,
+        );
+        signupForm.reset();
+      });
+    </script>
+  </body>
+</html>
